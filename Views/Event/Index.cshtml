@@ -1,0 +1,50 @@
+@model List<mvc.Models.EventModel>
+
+<h1 class="mb-2">Events</h1>
+<div>
+  <a class="mb-3 nav-link btn btn-success w-25 text-white text-center" asp-controller="Event" asp-action="New">New</a>
+</div>
+
+<table class="table table-stripped">
+  <thead>
+    <tr>
+      <th class="text-center">Title</th>
+      <th class="text-center">Date</th>
+      <th class="text-center">Max Participants</th>
+      <th class="text-center">Location</th>
+      <th class="text-center">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var eventObject in Model)
+    {
+      <tr>
+        <th scope="row" class="text-center">
+          <a asp-controller="Event" asp-action="Show" asp-route-id="@eventObject.Id">
+            @eventObject.Title
+          </a>
+        </th>
+        <td class="text-center">@eventObject.EventDate</td>
+        <td class="text-center">@eventObject.MaxParticipants</td>
+        <td class="text-center">@eventObject.Location</td>
+        <td>
+          <div class='dropdown'>
+            <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown">Actions</button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" asp-controller="Event" asp-action="Edit" asp-route-id="@eventObject.Id">Edit</a></li>
+              <li><a class="dropdown-item" onclick="confirmDelete(event)" asp-controller="Event" asp-action="Delete" asp-route-id="@eventObject.Id">Delete</a></li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+<script>
+  function confirmDelete() {
+    if(!confirm('Are you sure to want to delete this Event ?')) {
+      event.preventDefault();
+    }
+  }
+</script>
