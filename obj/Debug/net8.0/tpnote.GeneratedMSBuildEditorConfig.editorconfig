@@ -18,70 +18,70 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\alexi\OneDrive\Documents\ISITECH\.NET\Projects\TPnote\tp_note
 build_property._RazorSourceGeneratorDebug = 
 
-[c:/Users/alexi/OneDrive/Documents/ISITECH/.NET/Projects/TPnote/tp_note/Views/Account/Login.cshtml]
+[C:/Users/alexi/OneDrive/Documents/ISITECH/.NET/Projects/TPnote/tp_note/Views/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/alexi/OneDrive/Documents/ISITECH/.NET/Projects/TPnote/tp_note/Views/Account/Register.cshtml]
+[C:/Users/alexi/OneDrive/Documents/ISITECH/.NET/Projects/TPnote/tp_note/Views/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/alexi/OneDrive/Documents/ISITECH/.NET/Projects/TPnote/tp_note/Views/Home/Index.cshtml]
+[C:/Users/alexi/OneDrive/Documents/ISITECH/.NET/Projects/TPnote/tp_note/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/alexi/OneDrive/Documents/ISITECH/.NET/Projects/TPnote/tp_note/Views/Home/Privacy.cshtml]
+[C:/Users/alexi/OneDrive/Documents/ISITECH/.NET/Projects/TPnote/tp_note/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/alexi/OneDrive/Documents/ISITECH/.NET/Projects/TPnote/tp_note/Views/Shared/Error.cshtml]
+[C:/Users/alexi/OneDrive/Documents/ISITECH/.NET/Projects/TPnote/tp_note/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/alexi/OneDrive/Documents/ISITECH/.NET/Projects/TPnote/tp_note/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/alexi/OneDrive/Documents/ISITECH/.NET/Projects/TPnote/tp_note/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/alexi/OneDrive/Documents/ISITECH/.NET/Projects/TPnote/tp_note/Views/Student/Edit.cshtml]
+[C:/Users/alexi/OneDrive/Documents/ISITECH/.NET/Projects/TPnote/tp_note/Views/Student/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/alexi/OneDrive/Documents/ISITECH/.NET/Projects/TPnote/tp_note/Views/Student/Index.cshtml]
+[C:/Users/alexi/OneDrive/Documents/ISITECH/.NET/Projects/TPnote/tp_note/Views/Student/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/alexi/OneDrive/Documents/ISITECH/.NET/Projects/TPnote/tp_note/Views/Student/New.cshtml]
+[C:/Users/alexi/OneDrive/Documents/ISITECH/.NET/Projects/TPnote/tp_note/Views/Student/New.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxOZXcuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/alexi/OneDrive/Documents/ISITECH/.NET/Projects/TPnote/tp_note/Views/Student/Show.cshtml]
+[C:/Users/alexi/OneDrive/Documents/ISITECH/.NET/Projects/TPnote/tp_note/Views/Student/Show.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxTaG93LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/alexi/OneDrive/Documents/ISITECH/.NET/Projects/TPnote/tp_note/Views/Teacher/Edit.cshtml]
+[C:/Users/alexi/OneDrive/Documents/ISITECH/.NET/Projects/TPnote/tp_note/Views/Teacher/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhY2hlclxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/alexi/OneDrive/Documents/ISITECH/.NET/Projects/TPnote/tp_note/Views/Teacher/Index.cshtml]
+[C:/Users/alexi/OneDrive/Documents/ISITECH/.NET/Projects/TPnote/tp_note/Views/Teacher/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhY2hlclxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/alexi/OneDrive/Documents/ISITECH/.NET/Projects/TPnote/tp_note/Views/Teacher/New.cshtml]
+[C:/Users/alexi/OneDrive/Documents/ISITECH/.NET/Projects/TPnote/tp_note/Views/Teacher/New.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhY2hlclxOZXcuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/alexi/OneDrive/Documents/ISITECH/.NET/Projects/TPnote/tp_note/Views/Teacher/Show.cshtml]
+[C:/Users/alexi/OneDrive/Documents/ISITECH/.NET/Projects/TPnote/tp_note/Views/Teacher/Show.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhY2hlclxTaG93LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/alexi/OneDrive/Documents/ISITECH/.NET/Projects/TPnote/tp_note/Views/_ViewImports.cshtml]
+[C:/Users/alexi/OneDrive/Documents/ISITECH/.NET/Projects/TPnote/tp_note/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/alexi/OneDrive/Documents/ISITECH/.NET/Projects/TPnote/tp_note/Views/_ViewStart.cshtml]
+[C:/Users/alexi/OneDrive/Documents/ISITECH/.NET/Projects/TPnote/tp_note/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/alexi/OneDrive/Documents/ISITECH/.NET/Projects/TPnote/tp_note/Views/Shared/_Layout.cshtml]
+[C:/Users/alexi/OneDrive/Documents/ISITECH/.NET/Projects/TPnote/tp_note/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-98hz263vv3

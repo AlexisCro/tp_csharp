@@ -63,6 +63,7 @@ public class TeacherController : Controller
       return View("Edit");
     }
 
+    // TODO : See why the teacherToUpdate is null
     var teacherToUpdate = await _userManager.FindByIdAsync(teacher.Id);
 
     teacherToUpdate.Firstname = teacher.Firstname;
