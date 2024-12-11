@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("tpnote")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+18efbed7e0fcb37440c9cfdebeacc5a1bc595bcc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a0d800d7bd2e3a89676e9071f7d55e3ebed79e14")]
 [assembly: System.Reflection.AssemblyProductAttribute("tpnote")]
 [assembly: System.Reflection.AssemblyTitleAttribute("tpnote")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
