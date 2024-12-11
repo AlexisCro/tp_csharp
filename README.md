@@ -23,6 +23,8 @@ To realize migrations we need to launch this commands :
 `dotnet ef migrations add <migration name>` to create the migration 
 `dotnet ef database update` to launch the migration
 
+## Identity
+
 ## Teacher Object
 ### Model
 

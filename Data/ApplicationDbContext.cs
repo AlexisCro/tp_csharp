@@ -1,12 +1,11 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using mvc.Models;
 
 namespace mvc.Data;
 
-public class ApplicationDbContext : DbContext
+public class ApplicationDbContext : IdentityDbContext<TeacherModel>
 {
-  public DbSet<TeacherModel> Teachers { get; set; }
-
   public DbSet<StudentModel> Students { get; set; }
 
   public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)

@@ -14,65 +14,65 @@ public class TeacherController : Controller
     _context = context;
   }
 
-  public ActionResult Index()
-  {
-    return View(_context.Teachers.ToList());
-  }
+  // public ActionResult Index()
+  // {
+  //   return View(_context.Teachers.ToList());
+  // }
 
   public ActionResult New()
   {
     return View();
   }
 
-  public ActionResult Create(TeacherModel teacher)
-  {
-    if (!ModelState.IsValid)
-    {
-      return View("New");
-    }
+  // public ActionResult Create(TeacherModel teacher)
+  // {
+  //   if (!ModelState.IsValid)
+  //   {
+  //     return View("New");
+  //   }
 
-    teacher.Email = teacher.Firstname.ToLower() + "_" + teacher.Lastname.ToLower() + "@school.com";
-    // Ajouter le teacher
-    _context.Teachers.Add(teacher);
+  //   teacher.Email = teacher.Firstname.ToLower() + "_" + teacher.Lastname.ToLower() + "@school.com";
+  //   // Ajouter le teacher
+  //   _context.Teachers.Add(teacher);
 
-    // Sauvegarder les changements
-    _context.SaveChanges();
-    return RedirectToAction("Index");
-  }
+  //   // Sauvegarder les changements
+  //   _context.SaveChanges();
+  //   return RedirectToAction("Index");
+  // }
 
-  public ActionResult Show(int id)
-  {
-    var teacher = _context.Teachers.Find(id);
-    return View(teacher);
-  }
+  // public ActionResult Show(int id)
+  // {
+  //   var teacher = _context.Teachers.Find(id);
+  //   return View(teacher);
+  // }
 
-  public ActionResult Edit(int id)
-  {
-    var teacher = _context.Teachers.Find(id);
-    return View(teacher);
-  }
+  // public ActionResult Edit(int id)
+  // {
+  //   var teacher = _context.Teachers.Find(id);
+  //   return View(teacher);
+  // }
 
-  public ActionResult Update(TeacherModel teacher)
-  {
-    if (!ModelState.IsValid)
-    {
-      return View("Edit");
-    }
+  // public ActionResult Update(TeacherModel teacher)
+  // {
+  //   if (!ModelState.IsValid)
+  //   {
+  //     return View("Edit");
+  //   }
 
-    var teacherToUpdate = _context.Teachers.Find(teacher.Id);
+  //   var teacherToUpdate = _context.Teachers.Find(teacher.Id);
 
-    teacherToUpdate.Firstname = teacher.Firstname;
-    teacherToUpdate.Lastname = teacher.Lastname;
-    teacherToUpdate.Email = teacher.Firstname.ToLower() + "_" + teacher.Lastname.ToLower() + "@school.com";
+  //   teacherToUpdate.Firstname = teacher.Firstname;
+  //   teacherToUpdate.Lastname = teacher.Lastname;
+  //   teacherToUpdate.Email = teacher.Firstname.ToLower() + "_" + teacher.Lastname.ToLower() + "@school.com";
 
-    _context.SaveChanges();
-    return RedirectToAction("Index");
-  }
+  //   _context.SaveChanges();
+  //   return RedirectToAction("Index");
+  // }
 
-  public ActionResult Delete(int id)
-  {
-    _context.Teachers.Remove(_context.Teachers.Find(id));
-    _context.SaveChanges();
-    return RedirectToAction("Index");
-  }
+  // public ActionResult Delete(int id)
+  // {
+  //   _context.Teachers.Remove(_context.Teachers.Find(id));
+  //   _context.SaveChanges();
+  //   return RedirectToAction("Index");
+  // }
 }

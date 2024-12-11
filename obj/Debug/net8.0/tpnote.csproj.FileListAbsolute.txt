@@ -140,3 +140,7 @@ C:\Users\alexi\OneDrive\Documents\ISITECH\.NET\Projects\TPnote\tp_note\obj\Debug
 C:\Users\alexi\OneDrive\Documents\ISITECH\.NET\Projects\TPnote\tp_note\obj\Debug\net8.0\tpnote.pdb
 C:\Users\alexi\OneDrive\Documents\ISITECH\.NET\Projects\TPnote\tp_note\obj\Debug\net8.0\tpnote.genruntimeconfig.cache
 C:\Users\alexi\OneDrive\Documents\ISITECH\.NET\Projects\TPnote\tp_note\obj\Debug\net8.0\ref\tpnote.dll
+C:\Users\alexi\OneDrive\Documents\ISITECH\.NET\Projects\TPnote\tp_note\obj\Debug\net8.0\tpnote.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\alexi\OneDrive\Documents\ISITECH\.NET\Projects\TPnote\tp_note\obj\Debug\net8.0\tpnote.sourcelink.json
+C:\Users\alexi\OneDrive\Documents\ISITECH\.NET\Projects\TPnote\tp_note\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.UI.dll
+C:\Users\alexi\OneDrive\Documents\ISITECH\.NET\Projects\TPnote\tp_note\bin\Debug\net8.0\Microsoft.Extensions.FileProviders.Embedded.dll
