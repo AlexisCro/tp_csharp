@@ -1,0 +1,22 @@
+@model mvc.Models.EventModel;
+
+<h1>@Model.Title</h1>
+
+<div class='row'>
+  <div class='col-md-3'>
+    <div class="card my-2">
+      <div class='card-body d-flex flex-column align-items-center'>
+        <p>Date: @Model.EventDate</p>
+        <p>Max Participants: @Model.MaxParticipants</p>
+        <p>Location: @Model.Location</p>
+      </div>
+    </div>
+  </div>
+  <div class='col-md-9'>
+    <div class="card w-70 my-2">
+      <div class='card-body'>
+        <p>@Model.Description</p>
+      </div>
+    </div>
+  </div>
+</div>

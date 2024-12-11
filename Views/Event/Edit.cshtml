@@ -1,0 +1,40 @@
+@model mvc.Models.EventModel
+
+<h1>Edit @Model.Title</h1>
+
+<form asp-action="Update" asp-controller="Event" method="post" class="w-75goi">
+  <div class='row mb-2'>
+    <div class='col-md-6'>
+      <div>
+        <input id="Title" type="string" name="Title" placeholder="Title">
+        <span asp-validation-for="Title" class="text-danger d-block"></span>
+      </div>
+    </div>
+    <div class='col-md-6'>
+      <div>
+        <input id="EventDate" type="datetime-local" name="EventDate">
+        <span asp-validation-for="EventDate" class="text-danger d-block"></span>
+      </div>
+    </div>
+  </div>
+  <div class='row mb-2'>
+    <div class="col-md-6">
+      <div>
+        <input id="MaxParticipants" type="number" min="10" max="200" name="MaxParticipants" placeholder="MaxParticipants">
+        <span asp-validation-for="MaxParticipants" class="text-danger d-block"></span>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div>
+        <input id="Location" type="string" name="Location" placeholder="Location">
+        <span asp-validation-for="Location" class="text-danger d-block"></span>
+      </div>
+    </div>
+  </div>
+  <div class="w-50 mb-2">
+      <textarea id="Description" rows="10" name="Description" placeholder="Description"></textarea>
+      <span asp-validation-for="Description" class="text-danger d-block"></span>
+  </div>
+
+  <input type="submit" value="Update" class="btn btn-primary">
+</form>
