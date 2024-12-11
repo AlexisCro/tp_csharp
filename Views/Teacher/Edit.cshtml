@@ -1,0 +1,17 @@
+@model mvc.Models.TeacherModel
+
+<h1>Edit @Model.Firstname @Model.Lastname</h1>
+
+<form asp-action="Update">
+  <div class="w-50 mb-2">
+      <input type="string" name="Firstname" placeholder=@Model.Firstname value=@Model.Firstname>
+      <span asp-validation-for="Firstname" class="text-danger d-block"></span>
+  </div>
+
+  <div class="w-50 mb-2">
+      <input type="string" name="Lastname" placeholder=@Model.Lastname value=@Model.Lastname>
+      <span asp-validation-for="Lastname" class="text-danger d-block"></span>
+  </div>
+
+  <input type="submit" value="Update" class="btn btn-primary">
+</form>

@@ -1,0 +1,46 @@
+@model List<mvc.Models.StudentModel>
+
+<h1 class="mb-2">Students</h1>
+<div>
+  <a class="mb-3 nav-link btn btn-success w-25 text-white text-center" asp-controller="Student" asp-action="New">New</a>
+</div>
+
+<table class="table table-stripped">
+  <thead>
+    <tr>
+      <th class="text-center">Name</th>
+      <th class="text-center">Email</th>
+      <th class="text-center">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var student in Model)
+    {
+      <tr>
+        <th scope="row" class="text-center">
+          <a asp-controller="Student" asp-action="Show" asp-route-id="@student.Id">
+            @student.Firstname @student.Lastname
+          </a>
+        </th>
+        <td class="text-center">@student.Email</td>
+        <td>
+          <div class='dropdown'>
+            <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown">Actions</button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" asp-controller="Student" asp-action="Edit" asp-route-id="@student.Id">Edit</a></li>
+              <li><a class="dropdown-item" onclick="confirmDelete(event)" asp-controller="Student" asp-action="Delete" asp-route-id="@student.Id">Delete</a></li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+<script>
+  function confirmDelete() {
+    if(!confirm('Are you sure to want to delete this Teacher ?')) {
+      event.preventDefault();
+    }
+  }
+</script>

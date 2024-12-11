@@ -1,0 +1,16 @@
+@model mvc.Models.TeacherModel
+
+<h1>A new teacher</h1>
+
+<form asp-action="Create" asp-controller="Teacher" method="post">
+  <div class="w-50 mb-2">
+      <input id="firstname" type="string" name="Firstname" placeholder="Firstname">
+      <span asp-validation-for="Firstname" class="text-danger d-block"></span>
+  </div>
+  <div class="w-50 mb-2">
+      <input id="lastname" type="string" name="Lastname" placeholder="Lastname">
+      <span asp-validation-for="Lastname" class="text-danger d-block"></span>
+  </div>
+
+  <input type="submit" value="Create" class="btn btn-primary">
+</form>
