@@ -49,6 +49,7 @@ public class EventController : Controller
     return View(eventObject);
   }
 
+// TODO: See errors
   public ActionResult Update(EventModel eventModel)
   {
     if (!ModelState.IsValid)

@@ -5,34 +5,34 @@
 <form asp-action="Update" asp-controller="Event" method="post" class="w-75goi">
   <div class='row mb-2'>
     <div class='col-md-6'>
-      <div>
-        <input id="Title" type="string" name="Title" placeholder="Title">
+      <div class="w-100">
+        <input class="w-100" id="Title" type="string" value=@Model.Title name="Title" placeholder="Title">
         <span asp-validation-for="Title" class="text-danger d-block"></span>
       </div>
     </div>
     <div class='col-md-6'>
-      <div>
-        <input id="EventDate" type="datetime-local" name="EventDate">
+      <div class="w-100">
+        <input class="w-100" id="EventDate" type="datetime-local" value=@Model.EventDate name="EventDate">
         <span asp-validation-for="EventDate" class="text-danger d-block"></span>
       </div>
     </div>
   </div>
   <div class='row mb-2'>
     <div class="col-md-6">
-      <div>
-        <input id="MaxParticipants" type="number" min="10" max="200" name="MaxParticipants" placeholder="MaxParticipants">
+      <div class="w-100">
+        <input class="w-100" id="MaxParticipants" type="number" min="10" max="200" value=@Model.MaxParticipants name="MaxParticipants" placeholder="MaxParticipants">
         <span asp-validation-for="MaxParticipants" class="text-danger d-block"></span>
       </div>
     </div>
     <div class="col-md-6">
-      <div>
-        <input id="Location" type="string" name="Location" placeholder="Location">
+      <div class="w-100">
+        <input class="w-100" id="Location" type="string" value=@Model.Location name="Location" placeholder="Location">
         <span asp-validation-for="Location" class="text-danger d-block"></span>
       </div>
     </div>
   </div>
-  <div class="w-50 mb-2">
-      <textarea id="Description" rows="10" name="Description" placeholder="Description"></textarea>
+  <div class="w-100 mb-2">
+      <textarea class="w-100" id="Description" rows="10" name="Description" placeholder="Description">@Model.Description</textarea>
       <span asp-validation-for="Description" class="text-danger d-block"></span>
   </div>
 
