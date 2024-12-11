@@ -7,6 +7,7 @@ namespace mvc.Data;
 public class ApplicationDbContext : IdentityDbContext<TeacherModel>
 {
   public DbSet<StudentModel> Students { get; set; }
+  public DbSet<EventModel> Events { get; set; }
 
   public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
   {

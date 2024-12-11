@@ -1,9 +1,8 @@
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Identity;
 
 namespace mvc.Models;
 
-public class Event
+public class EventModel
 {
   public int Id { get; set; }
   [Required]
