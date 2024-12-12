@@ -1,8 +1,36 @@
-﻿@{
+﻿@using mvc.Controllers;
+@using mvc.Models;
+@model List<EventModel>;
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<article class="w-100" style="background-color: rgb(5, 5, 56)">
+  <div class="row p-0 m-0">
+    <div class='col-md-8'>
+      <h1 class="text-white">Rejoins nous et inscrits toi aux évènements</h1>
+    </div>
+    <div class='col-md-3'>
+      <h2 class="text-white">Renseigne toi auprès de ton professeur</del></s></h2>
+    </div>
+  </div>
+</article>
+
+<div class='d-flex justify-content-around align-items-center flex-row'>
+  @foreach(var eventObject in @Model)
+  {
+    <div class="card m-3 w-50" style="height: 300px;">
+      <div class='card-header'>
+        <h3>@eventObject.Title</h3>
+      </div>
+      <div class='card-body overflow-y-auto' style="max-height:150xp;">
+        <p>@eventObject.Description</p>
+      </div>
+      <div class='card-footer d-flex flex-row justify-content-around align-items-center'>
+        <p>Date : @eventObject.EventDate</p>
+        <p>Max Participants : @eventObject.MaxParticipants</p>
+      </div>
+    </div>
+  }
 </div>

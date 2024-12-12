@@ -192,7 +192,7 @@ namespace tpnote.Migrations
                     b.ToTable("Events");
                 });
 
-            modelBuilder.Entity("mvc.Models.StudentModel", b =>
+            modelBuilder.Entity("mvc.Models.RoleModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -200,27 +200,16 @@ namespace tpnote.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Age")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Firstname")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Lastname")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Students");
+                    b.ToTable("Roles");
                 });
 
-            modelBuilder.Entity("mvc.Models.TeacherModel", b =>
+            modelBuilder.Entity("mvc.Models.UserModel", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -270,6 +259,9 @@ namespace tpnote.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -290,7 +282,25 @@ namespace tpnote.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.ToTable("AspNetUsers", (string)null);
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("Users", (string)null);
+
+                    b.UseTptMappingStrategy();
+                });
+
+            modelBuilder.Entity("mvc.Models.StudentModel", b =>
+                {
+                    b.HasBaseType("mvc.Models.UserModel");
+
+                    b.ToTable("Students", (string)null);
+                });
+
+            modelBuilder.Entity("mvc.Models.TeacherModel", b =>
+                {
+                    b.HasBaseType("mvc.Models.UserModel");
+
+                    b.ToTable("Teachers", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -304,7 +314,7 @@ namespace tpnote.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("mvc.Models.TeacherModel", null)
+                    b.HasOne("mvc.Models.UserModel", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -313,7 +323,7 @@ namespace tpnote.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("mvc.Models.TeacherModel", null)
+                    b.HasOne("mvc.Models.UserModel", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -328,7 +338,7 @@ namespace tpnote.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("mvc.Models.TeacherModel", null)
+                    b.HasOne("mvc.Models.UserModel", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -337,9 +347,38 @@ namespace tpnote.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("mvc.Models.TeacherModel", null)
+                    b.HasOne("mvc.Models.UserModel", null)
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("mvc.Models.UserModel", b =>
+                {
+                    b.HasOne("mvc.Models.RoleModel", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("mvc.Models.StudentModel", b =>
+                {
+                    b.HasOne("mvc.Models.UserModel", null)
+                        .WithOne()
+                        .HasForeignKey("mvc.Models.StudentModel", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("mvc.Models.TeacherModel", b =>
+                {
+                    b.HasOne("mvc.Models.UserModel", null)
+                        .WithOne()
+                        .HasForeignKey("mvc.Models.TeacherModel", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

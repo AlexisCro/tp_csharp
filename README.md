@@ -2,8 +2,9 @@
 ## Database Implementation
 This project will use SQL Server. 
 
-### Package
+### Packages
 - dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 8.0.1
+- 
 
 Launch command 
 `dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 8.0.1`

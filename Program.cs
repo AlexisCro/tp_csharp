@@ -12,7 +12,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(
   Options => Options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 
-builder.Services.AddIdentity<TeacherModel, IdentityRole>(options =>
+builder.Services.AddIdentity<UserModel, IdentityRole>(options =>
 {
   options.Password.RequireDigit = true;
   options.Password.RequireLowercase = true;
@@ -23,6 +23,8 @@ builder.Services.AddIdentity<TeacherModel, IdentityRole>(options =>
   options.User.RequireUniqueEmail = true;
 }).AddEntityFrameworkStores<ApplicationDbContext>();
 
+builder.Services.AddIdentityCore<TeacherModel>().AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddIdentityCore<StudentModel>().AddEntityFrameworkStores<ApplicationDbContext>();
 
 var app = builder.Build();
 

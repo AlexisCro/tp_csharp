@@ -1,4 +1,6 @@
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
 using mvc.Data;
 using mvc.Models;
 
@@ -7,11 +9,14 @@ namespace mvc.Controllers;
 public class StudentController : Controller
 {
   private readonly ApplicationDbContext _context;
+  private readonly UserModel _user;
+  private readonly UserManager<UserModel> _userManager;
 
   // Constructeur and connect to the database
-  public StudentController(ApplicationDbContext context)
+  public StudentController(ApplicationDbContext context, UserManager<UserModel> userManager)
   {
-    _context = context;
+    _context     = context;
+    _userManager = userManager;
   }
 
   public ActionResult Index()
@@ -26,11 +31,14 @@ public class StudentController : Controller
 
   public ActionResult Create(StudentModel student)
   {
-    if (!ModelState.IsValid)
+    if (_context.Roles.FirstOrDefault(r => r.Name == "Student") == null)
     {
-      return View("New");
+      _context.Roles.Add(new RoleModel { Name = "Student" });
+      _context.SaveChanges();
     }
 
+    student.Role = _context.Roles.FirstOrDefault(role => role.Name == "Student");
+    student.UserName = student.Firstname.ToLower() + "_" + student.Lastname.ToLower();
     student.Email = student.Firstname.ToLower() + "_" + student.Lastname.ToLower() + "@school.com";
     // Ajouter le student
     _context.Students.Add(student);
@@ -40,13 +48,13 @@ public class StudentController : Controller
     return RedirectToAction("Index");
   }
 
-  public ActionResult Show(int id)
+  public ActionResult Show(string id)
   {
     var student = _context.Students.Find(id);
     return View(student);
   }
 
-  public ActionResult Edit(int id)
+  public ActionResult Edit(string id)
   {
     var student = _context.Students.Find(id);
     return View(student);
@@ -69,7 +77,7 @@ public class StudentController : Controller
     return RedirectToAction("Index");
   }
 
-  public ActionResult Delete(int id)
+  public ActionResult Delete(string id)
   {
     _context.Students.Remove(_context.Students.Find(id));
     _context.SaveChanges();

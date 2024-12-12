@@ -1,16 +1,8 @@
 using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace mvc.Models;
 
-public class StudentModel
+public class StudentModel : UserModel
 {
-  public int Id { get; set; }
-
-  [Required]
-  public string Firstname { get; set; }
-
-  [Required]
-  public string Lastname { get; set; }
-  public string Email { get; set; } = string.Empty;
-  public int Age { get; set; }
 }

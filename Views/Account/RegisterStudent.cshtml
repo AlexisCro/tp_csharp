@@ -1,0 +1,25 @@
+@using mvc.ViewModels
+@model AccountStudentViewModel
+
+<h1>Registering Student</h1>
+
+<form asp-controller="Account" asp-action="RegisterStudent" method="post">
+  <div class='mb-3 w-50'>
+    <input type="text" name="Firstname" placeholder="Firstname"/>
+    <span asp-validation-for="Firstname" class="text-danger"></span>
+  </div>
+  <div class='mb-3 w-50'>
+    <input type="text" name="Lastname" placeholder="Lastname"/>
+    <span asp-validation-for="Lastname" class="text-danger"></span>
+  </div>
+  <div class='mb-3 w-50'>
+    <input type="password" name="PasswordHashed" placeholder="Password"/>
+    <span asp-validation-for="PasswordHashed" class="text-danger"></span>
+  </div>
+  <div class='mb-3 w-50'>
+    <input type="password" name="ConfirmedPassword" placeholder="Confirmed Password"/>
+    <span asp-validation-for="ConfirmedPassword" class="text-danger"></span>
+  </div>
+
+  <input type="submit" value="Create" class="btn btn-primary">
+</form>

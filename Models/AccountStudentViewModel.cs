@@ -4,7 +4,7 @@ using mvc.ViewModels;
 using System.ComponentModel.DataAnnotations;
 
 namespace mvc.ViewModels;
-public class AccountViewModel
+public class AccountStudentViewModel
 {
   [Required]
   public string Firstname { get; set; }
@@ -14,5 +14,4 @@ public class AccountViewModel
   public string PasswordHashed { get; set; }
   [Required]
   public string ConfirmedPassword { get; set; }
-  public string Name { get; set; }
 }
