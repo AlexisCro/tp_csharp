@@ -49,7 +49,7 @@ public class EventController : Controller
     return View(eventObject);
   }
 
-// TODO: See errors
+// TODO: Do a view model to fix the problem.
   public ActionResult Update(EventModel eventModel)
   {
     if (!ModelState.IsValid)
@@ -57,8 +57,13 @@ public class EventController : Controller
       return View("Edit");
     }
 
-    // Mettre à jour l'événement
-    _context.Events.Update(eventModel);
+    var eventToUpdate = _context.Events.Find(eventModel.Id);
+
+    eventToUpdate.Title = eventModel.Title;
+    eventToUpdate.Description = eventModel.Description;
+    eventToUpdate.EventDate = eventModel.EventDate;
+    eventToUpdate.MaxParticipants = eventModel.MaxParticipants;
+    eventToUpdate.Location = eventModel.Location;
 
     // Sauvegarder les changements
     _context.SaveChanges();

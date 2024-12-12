@@ -1,8 +1,10 @@
-@model mvc.Models.EventModel
+@using mvc.Models
+@model EventModel
 
 <h1>Edit @Model.Title</h1>
 
 <form asp-action="Update" asp-controller="Event" method="post" class="w-75goi">
+  <input type="hidden" type="number" name="Id" value=@Model.Id>
   <div class='row mb-2'>
     <div class='col-md-6'>
       <div class="w-100">
@@ -12,7 +14,7 @@
     </div>
     <div class='col-md-6'>
       <div class="w-100">
-        <input class="w-100" id="EventDate" type="datetime-local" value=@Model.EventDate name="EventDate">
+        <input class="w-100" id="EventDate" asp-for="EventDate">
         <span asp-validation-for="EventDate" class="text-danger d-block"></span>
       </div>
     </div>
@@ -26,7 +28,7 @@
     </div>
     <div class="col-md-6">
       <div class="w-100">
-        <input class="w-100" id="Location" type="string" value=@Model.Location name="Location" placeholder="Location">
+        <input class="w-100" id="Location" asp-for="Location" placeholder="Location">
         <span asp-validation-for="Location" class="text-danger d-block"></span>
       </div>
     </div>
