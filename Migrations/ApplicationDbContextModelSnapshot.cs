@@ -182,6 +182,9 @@ namespace tpnote.Migrations
                     b.Property<int>("MaxParticipants")
                         .HasColumnType("int");
 
+                    b.Property<int>("ParticipantsCount")
+                        .HasColumnType("int");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -190,6 +193,30 @@ namespace tpnote.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Events");
+                });
+
+            modelBuilder.Entity("mvc.Models.ParticipantModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("EventId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StudentId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EventId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("Participants");
                 });
 
             modelBuilder.Entity("mvc.Models.RoleModel", b =>
@@ -354,6 +381,25 @@ namespace tpnote.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("mvc.Models.ParticipantModel", b =>
+                {
+                    b.HasOne("mvc.Models.EventModel", "Event")
+                        .WithMany("Participants")
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("mvc.Models.StudentModel", "Student")
+                        .WithMany("Participants")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Event");
+
+                    b.Navigation("Student");
+                });
+
             modelBuilder.Entity("mvc.Models.UserModel", b =>
                 {
                     b.HasOne("mvc.Models.RoleModel", "Role")
@@ -379,6 +425,16 @@ namespace tpnote.Migrations
                         .HasForeignKey("mvc.Models.TeacherModel", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("mvc.Models.EventModel", b =>
+                {
+                    b.Navigation("Participants");
+                });
+
+            modelBuilder.Entity("mvc.Models.StudentModel", b =>
+                {
+                    b.Navigation("Participants");
                 });
 #pragma warning restore 612, 618
         }

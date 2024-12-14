@@ -11,6 +11,7 @@ public class ApplicationDbContext : IdentityDbContext<UserModel>
   public DbSet<TeacherModel> Teachers { get; set; }
   public DbSet<EventModel> Events { get; set; }
   public DbSet<RoleModel> Roles { get; set; }
+  public DbSet<ParticipantModel> Participants { get; set; }
 
   protected override void OnModelCreating(ModelBuilder builder)
   {

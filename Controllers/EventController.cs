@@ -38,12 +38,13 @@ public class EventController : Controller
     if (!await _userService.GetCurrentUserIsTeacher())
     {
       TempData["Error"] = "Vous n'êtes pas autorisé à créer un événement.";
-      return RedirectToAction("Index");
+      return RedirectToAction("Index", "Home");
     }
 
     if (!ModelState.IsValid)
     {
-      return View("New");
+      TempData["Error"] = "Un problème a eu lieu.";
+      return View("Index", "Home");
     }
 
     _context.Events.Add(eventModel);
@@ -70,7 +71,6 @@ public class EventController : Controller
     return View(eventObject);
   }
 
-// TODO: Do a view model to fix the problem.
   public async Task<ActionResult> Update(EventModel eventModel)
   {
     if (!await _userService.GetCurrentUserIsTeacher())
@@ -107,6 +107,30 @@ public class EventController : Controller
 
     var eventObject = _context.Events.Find(id);
     _context.Events.Remove(eventObject);
+    _context.SaveChanges();
+    return RedirectToAction("Index");
+  }
+
+  public async Task<ActionResult> SubscribeToEvent(int id)
+  {
+    var eventObject = _context.Events.Find(id);
+    var user = await _userService.GetCurrentStudent();
+    
+    var participant = new ParticipantModel
+    {
+      EventId = eventObject.Id,
+      StudentId = user.Id
+    };
+
+    if (eventObject.ParticipantsCount >= eventObject.MaxParticipants)
+    {
+      TempData["Info"] = "L'événement est complet.";
+      return RedirectToAction("Index");
+    }
+
+    eventObject.ParticipantsCount++;
+    _context.Participants.Add(participant);
+    TempData["Success"] = "Vous êtes inscrit à l'événement.";
     _context.SaveChanges();
     return RedirectToAction("Index");
   }

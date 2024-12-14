@@ -20,22 +20,21 @@ public class UserService
         _context             = context;
     }
 
-    public async Task<UserModel> GetUserByEmail(string email)
+    public async Task<UserModel> GetCurrentStudent()
     {
-        var user = await _userManager.FindByEmailAsync(email);
-        return user;
-    }
-
-    public async Task<UserModel> GetUserById(string id)
-    {
-        var user = await _userManager.FindByIdAsync(id);
-        return user;
-    }
-
-    public async Task<IdentityResult> DeleteUser(UserModel user)
-    {
-        var result = await _userManager.DeleteAsync(user);
-        return result;
+        var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+        if (currentUser == null)
+        {
+            return null;
+        }
+        else if (currentUser.RoleId == 1)
+        {
+            return null;
+        }
+        else
+        {
+            return currentUser;
+        }
     }
 
     public async Task<bool> GetCurrentUserIsTeacher()

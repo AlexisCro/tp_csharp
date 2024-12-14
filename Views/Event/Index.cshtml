@@ -1,3 +1,7 @@
+@using mvc.Services;
+
+@inject mvc.Services.UserService UserService
+
 @model List<mvc.Models.EventModel>
 
 <h1 class="mb-2">Events</h1>
@@ -10,7 +14,7 @@
     <tr>
       <th class="text-center">Title</th>
       <th class="text-center">Date</th>
-      <th class="text-center">Max Participants</th>
+      <th class="text-center">Participants</th>
       <th class="text-center">Location</th>
       <th class="text-center">Actions</th>
     </tr>
@@ -19,27 +23,62 @@
     @foreach (var eventObject in Model)
     {
       <tr>
-        <th scope="row" class="text-center">
-          <a asp-controller="Event" asp-action="Show" asp-route-id="@eventObject.Id">
-            @eventObject.Title
-          </a>
-        </th>
+        <th><a class="text-center" asp-controller="Event" asp-action="Show" asp-route-id="@eventObject.Id">@eventObject.Title</a></th>
         <td class="text-center">@eventObject.EventDate</td>
-        <td class="text-center">@eventObject.MaxParticipants</td>
+        <td class="text-center">@eventObject.ParticipantsCount / @eventObject.MaxParticipants</td>
         <td class="text-center">@eventObject.Location</td>
         <td>
-          <div class='dropdown'>
-            <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown">Actions</button>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" asp-controller="Event" asp-action="Edit" asp-route-id="@eventObject.Id">Edit</a></li>
-              <li><a class="dropdown-item" onclick="confirmDelete(event)" asp-controller="Event" asp-action="Delete" asp-route-id="@eventObject.Id">Delete</a></li>
-            </ul>
-          </div>
+          @if (await UserService.GetCurrentUserIsTeacher())
+          {
+            <div class='dropdown'>
+              <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown">Actions</button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" asp-controller="Event" asp-action="Edit" asp-route-id="@eventObject.Id">Edit</a></li>
+                <li><a class="dropdown-item" onclick="confirmDelete(event)" asp-controller="Event" asp-action="Delete" asp-route-id="@eventObject.Id">Delete</a></li>
+              </ul>
+            </div>
+          }
+          else
+          {
+            <a class="btn btn-success" asp-controller="Event" asp-action="SubscribeToEvent" asp-route-id="@eventObject.Id">Subscribe</a>
+          }
         </td>
       </tr>
     }
   </tbody>
 </table>
+
+@if (TempData["Info"] != null)
+{
+  <div class="toast-container ms-2 position-static">
+    <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header bg-info">
+        <strong class="me-auto">Info</strong>
+        <small class="text-body-secondary">A l'instant</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body"->
+        @TempData["Info"]
+      </div>
+    </div>
+  </div>
+}
+
+@if (TempData["Success"] != null)
+{
+  <div class="toast-container ms-2 position-static">
+    <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header bg-success text-white">
+        <strong class="me-auto">Success</strong>
+        <small class="text-body-secondary">A l'instant</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+        @TempData["Success"]
+      </div>
+    </div>
+  </div>
+}
 
 <script>
   function confirmDelete() {

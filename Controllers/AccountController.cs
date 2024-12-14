@@ -28,15 +28,7 @@ public class AccountController : Controller
   [HttpGet]
   public async Task<IActionResult> Register()
   {
-    if (await _userService.GetCurrentUserIsTeacher())
-    {
-      return View(new AccountViewModel());
-    }
-    else
-    {
-      TempData["Error"] = "Vous n'êtes pas autorisé à créer un compte Professeur.";
-      return RedirectToAction("Index", "Home");
-    }
+    return View(new AccountViewModel());
   }
 
   [HttpPost]
