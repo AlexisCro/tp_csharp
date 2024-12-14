@@ -1,17 +1,20 @@
 using Microsoft.AspNetCore.Mvc;
 using mvc.Data;
 using mvc.Models;
+using mvc.Services;
 
 namespace mvc.Controllers;
 
 public class EventController : Controller
 {
   private readonly ApplicationDbContext _context;
+  private readonly UserService _userService;
 
   // Constructeur and connect to the database
-  public EventController(ApplicationDbContext context)
+  public EventController(ApplicationDbContext context, UserService userService)
   {
     _context = context;
+    _userService = userService;
   }
  
   public ActionResult Index()
@@ -19,13 +22,25 @@ public class EventController : Controller
     return View(_context.Events.ToList());
   }
 
-  public ActionResult New()
+  public async Task<ActionResult> New()
   {
+    if (!await _userService.GetCurrentUserIsTeacher())
+    {
+      TempData["Error"] = "Vous n'êtes pas autorisé à créer un événement.";
+      return RedirectToAction("Index");
+    }
+
     return View();
   }
 
-  public ActionResult Create(EventModel eventModel)
+  public async Task<ActionResult> Create(EventModel eventModel)
   {
+    if (!await _userService.GetCurrentUserIsTeacher())
+    {
+      TempData["Error"] = "Vous n'êtes pas autorisé à créer un événement.";
+      return RedirectToAction("Index");
+    }
+
     if (!ModelState.IsValid)
     {
       return View("New");
@@ -43,15 +58,27 @@ public class EventController : Controller
     return View(eventObject);
   }
 
-  public ActionResult Edit(int id)
+  public async Task<ActionResult> Edit(int id)
   {
+    if (!await _userService.GetCurrentUserIsTeacher())
+    {
+      TempData["Error"] = "Vous n'êtes pas autorisé à modifier un événement.";
+      return RedirectToAction("Index");
+    }
+
     var eventObject = _context.Events.Find(id);
     return View(eventObject);
   }
 
 // TODO: Do a view model to fix the problem.
-  public ActionResult Update(EventModel eventModel)
+  public async Task<ActionResult> Update(EventModel eventModel)
   {
+    if (!await _userService.GetCurrentUserIsTeacher())
+    {
+      TempData["Error"] = "Vous n'êtes pas autorisé à modifier un événement.";
+      return RedirectToAction("Index");
+    }
+
     if (!ModelState.IsValid)
     {
       return View("Edit");
@@ -70,8 +97,14 @@ public class EventController : Controller
     return RedirectToAction("Index");
   }
 
-  public ActionResult Delete(int id)
+  public async Task<ActionResult> Delete(int id)
   {
+    if (!await _userService.GetCurrentUserIsTeacher())
+    {
+      TempData["Error"] = "Vous n'êtes pas autorisé à supprimer un événement.";
+      return RedirectToAction("Index");
+    }
+
     var eventObject = _context.Events.Find(id);
     _context.Events.Remove(eventObject);
     _context.SaveChanges();

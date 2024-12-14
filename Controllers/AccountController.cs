@@ -5,7 +5,6 @@ using mvc.Models;
 using mvc.Data;
 using mvc.ViewModels;
 using mvc.Services;
-using System.Security.Permissions;
 
 public class AccountController : Controller
 {
@@ -27,9 +26,17 @@ public class AccountController : Controller
   }
 
   [HttpGet]
-  public IActionResult Register()
+  public async Task<IActionResult> Register()
   {
-    return View(new AccountViewModel());
+    if (await _userService.GetCurrentUserIsTeacher())
+    {
+      return View(new AccountViewModel());
+    }
+    else
+    {
+      TempData["Error"] = "Vous n'êtes pas autorisé à créer un compte Professeur.";
+      return RedirectToAction("Index", "Home");
+    }
   }
 
   [HttpPost]
@@ -82,7 +89,7 @@ public class AccountController : Controller
     }
     else
     {
-      TempData["errors"] = "You are not authorized to create a student account.";
+      TempData["Error"] = "Vous n'êtes pas autorisé à créer un compte Etudiant.";
       return RedirectToAction("Index", "Home");
     }
   }
@@ -125,15 +132,8 @@ public class AccountController : Controller
     }
     else
     {
-      var errors = new List<IdentityError>
-      {
-        new IdentityError
-        {
-          Code = "Unauthorized",
-          Description = "You are not authorized to create a student account."
-        }
-      };
-      return RedirectToAction("Index", "Home", errors);
+      TempData["Error"] = "Vous n'êtes pas autorisé à créer un compte Etudiant.";
+      return RedirectToAction("Index", "Home");
     }
   }
 

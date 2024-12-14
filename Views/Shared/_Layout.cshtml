@@ -45,6 +45,9 @@
                             </li>
                           }
                           <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Event" asp-action="Index">Events</a>
+                          </li>
+                          <li class="nav-item">
                               <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
                           </li>
                         }
@@ -67,9 +70,9 @@
             @RenderBody()
         </main>
     </div>
-    @if(TempData["errors"] != null)
+    @if(TempData["Error"] != null)
     {
-      <div class="toast-container position-static">
+      <div class="toast-container ms-2 position-static">
         <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
           <div class="toast-header bg-danger text-white">
             <strong class="me-auto">Erreur</strong>
@@ -77,7 +80,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
           </div>
           <div class="toast-body"->
-            @TempData["errors"]
+            @TempData["Error"]
           </div>
         </div>
       </div>

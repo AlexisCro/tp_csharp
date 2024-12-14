@@ -1,19 +1,20 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
-using mvc.Data;
 using mvc.Models;
+using mvc.Services;
 
 namespace mvc.Controllers;
 
 public class TeacherController : Controller
 {
-  private readonly ApplicationDbContext _context;
   private readonly UserManager<TeacherModel> _userManager;
+  private readonly UserService _userService;
 
   // Constructeur and connect to the database
-  public TeacherController(UserManager<TeacherModel> userManager)
+  public TeacherController(UserManager<TeacherModel> userManager, UserService userService)
   {
       _userManager = userManager;
+      _userService = userService;
   }
 
   public async Task<ActionResult> Index()
@@ -21,28 +22,6 @@ public class TeacherController : Controller
     var teachers = _userManager.Users;
     return View(teachers.ToList());
   }
-
-  public ActionResult New()
-  {
-    return View();
-  }
-
-  // Managed by the register action from Entity
-  // public ActionResult Create(TeacherModel teacher)
-  // {
-  //   if (!ModelState.IsValid)
-  //   {
-  //     return View("New");
-  //   }
-
-  //   teacher.Email = teacher.Firstname.ToLower() + "_" + teacher.Lastname.ToLower() + "@school.com";
-  //   // Ajouter le teacher
-  //   _context.Teachers.Add(teacher);
-
-  //   // Sauvegarder les changements
-  //   _context.SaveChanges();
-  //   return RedirectToAction("Index");
-  // }
 
   public async Task<ActionResult> Show(string id)
   {
@@ -52,12 +31,24 @@ public class TeacherController : Controller
 
   public async Task<ActionResult> Edit(string id)
   {
+    if (!await _userService.GetCurrentUserIsTeacher())
+    {
+      TempData["Error"] = "Vous n'êtes pas autorisé à modifier un Professeur";
+      return RedirectToAction("Index", "Home");
+    }
+
     var teacher = await _userManager.FindByIdAsync(id);
     return View(teacher);
   }
 
   public async Task<ActionResult> Update(TeacherModel teacher)
   {
+    if (!await _userService.GetCurrentUserIsTeacher())
+    {
+      TempData["Error"] = "Vous n'êtes pas autorisé à modifier un Professeur";
+      return RedirectToAction("Index", "Home");
+    }
+
     if (!ModelState.IsValid)
     {
       return View("Edit");
@@ -86,6 +77,12 @@ public class TeacherController : Controller
 
   public async Task<ActionResult> Delete(string id)
   {
+    if (!await _userService.GetCurrentUserIsTeacher())
+    {
+      TempData["Error"] = "Vous n'êtes pas autorisé à supprimer un Professeur";
+      return RedirectToAction("Index", "Home");
+    }
+
     var teacher = await _userManager.FindByIdAsync(id);
     var result  = await _userManager.DeleteAsync(teacher);
 
