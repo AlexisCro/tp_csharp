@@ -1,4 +1,10 @@
 ﻿@using mvc.Models;
+@using mvc.Services;
+@using Microsoft.AspNetCore.Identity;
+
+@inject mvc.Services.UserService UserService
+@inject SignInManager<TeacherModel> SignInManager
+@inject UserManager<TeacherModel> UserManager
 
 <!DOCTYPE html>
 <html lang="en">
@@ -29,9 +35,15 @@
                           <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Teacher" asp-action="Index">Teachers</a>
                           </li>
-                          <li class="nav-item">
+                          @if(await UserService.GetCurrentUserIsTeacher())
+                          {
+                            <li class="nav-item">
                               <a class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="Index">Students</a>
-                          </li>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link text-dark" asp-area="" asp-controller="Event" asp-action="Create">Create Event</a>
+                            </li>
+                          }
                           <li class="nav-item">
                               <a class="nav-link text-dark" asp-area="" asp-controller="Event" asp-action="Index">Events</a>
                           </li>

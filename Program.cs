@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using mvc.Services;
 using mvc.Data;
 using mvc.Models;
 
@@ -25,6 +26,9 @@ builder.Services.AddIdentity<UserModel, IdentityRole>(options =>
 
 builder.Services.AddIdentityCore<TeacherModel>().AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddIdentityCore<StudentModel>().AddEntityFrameworkStores<ApplicationDbContext>();
+
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<UserService>();
 
 var app = builder.Build();
 

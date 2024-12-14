@@ -41,7 +41,7 @@ public class AccountController : Controller
         Firstname    = model.Firstname,
         Lastname     = model.Lastname,
         UserName     = model.Firstname.ToLower() + "_" + model.Lastname.ToLower(),
-        Role         = await _context.Roles.FirstOrDefaultAsync(role => role.Name == "Teacher")
+        Role         = await _context.Roles.FirstOrDefaultAsync(role => role.Name == "Teacher"),
       };
 
     var result = await _userManager.CreateAsync(user, model.PasswordHashed);
@@ -88,7 +88,7 @@ public class AccountController : Controller
         Firstname    = model.Firstname,
         Lastname     = model.Lastname,
         UserName     = model.Firstname.ToLower() + "_" + model.Lastname.ToLower(),
-        Role         = await _context.Roles.FirstOrDefaultAsync(role => role.Name == "Student")
+        Role         = await _context.Roles.FirstOrDefaultAsync(role => role.Name == "Student"),
       };
 
 
