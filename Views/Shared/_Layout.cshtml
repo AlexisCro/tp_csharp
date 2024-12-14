@@ -67,6 +67,21 @@
             @RenderBody()
         </main>
     </div>
+    @if(TempData["errors"] != null)
+    {
+      <div class="toast-container position-static">
+        <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-header bg-danger text-white">
+            <strong class="me-auto">Erreur</strong>
+            <small class="text-body-secondary">A l'instant</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+          <div class="toast-body"->
+            @TempData["errors"]
+          </div>
+        </div>
+      </div>
+    }
 
     <footer class="border-top footer text-muted">
         <div class="container">

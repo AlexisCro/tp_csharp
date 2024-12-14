@@ -4,18 +4,26 @@ using Microsoft.EntityFrameworkCore;
 using mvc.Models;
 using mvc.Data;
 using mvc.ViewModels;
+using mvc.Services;
+using System.Security.Permissions;
 
 public class AccountController : Controller
 {
   private readonly SignInManager<UserModel> _signInManager;
   private readonly UserManager<UserModel> _userManager;
   private readonly ApplicationDbContext _context;
+  private readonly UserService _userService;
 
-  public AccountController(SignInManager<UserModel> signInManager, UserManager<UserModel> userManager, ApplicationDbContext context)
+  public AccountController(
+    SignInManager<UserModel> signInManager,
+    UserManager<UserModel> userManager, 
+    ApplicationDbContext context,
+    UserService userService)
   {
     _signInManager = signInManager;
     _userManager   = userManager;
     _context       = context;
+    _userService   = userService;
   }
 
   [HttpGet]
@@ -66,44 +74,67 @@ public class AccountController : Controller
     return View(model);
   }
 
-  public IActionResult RegisterStudent()
+  public async Task<IActionResult> RegisterStudent()
   {
-    return View(new AccountStudentViewModel());
+    if (await _userService.GetCurrentUserIsTeacher())
+    {
+      return View(new AccountStudentViewModel());
+    }
+    else
+    {
+      TempData["errors"] = "You are not authorized to create a student account.";
+      return RedirectToAction("Index", "Home");
+    }
   }
 
 [HttpPost]
   public async Task<IActionResult> RegisterStudent(AccountStudentViewModel model)
   {
-    if (_context.Roles.FirstOrDefault(r => r.Name == "Student") == null)
+    if(await _userService.GetCurrentUserIsTeacher())
     {
-      _context.Roles.Add(new RoleModel { Name = "Student" });
-      _context.SaveChanges();
-
-    }
-
-    var user = new StudentModel
+      if (_context.Roles.FirstOrDefault(r => r.Name == "Student") == null)
       {
-        Email        = model.Firstname + "_" + model.Lastname + "@school.com",
-        PasswordHash = model.PasswordHashed,
-        Firstname    = model.Firstname,
-        Lastname     = model.Lastname,
-        UserName     = model.Firstname.ToLower() + "_" + model.Lastname.ToLower(),
-        Role         = await _context.Roles.FirstOrDefaultAsync(role => role.Name == "Student"),
-      };
+        _context.Roles.Add(new RoleModel { Name = "Student" });
+        _context.SaveChanges();
+
+      }
+
+      var user = new StudentModel
+        {
+          Email        = model.Firstname + "_" + model.Lastname + "@school.com",
+          PasswordHash = model.PasswordHashed,
+          Firstname    = model.Firstname,
+          Lastname     = model.Lastname,
+          UserName     = model.Firstname.ToLower() + "_" + model.Lastname.ToLower(),
+          Role         = await _context.Roles.FirstOrDefaultAsync(role => role.Name == "Student"),
+        };
 
 
-    var result = await _userManager.CreateAsync(user, model.PasswordHashed);
-    if (!ModelState.IsValid || !result.Succeeded)
-    {
+      var result = await _userManager.CreateAsync(user, model.PasswordHashed);
+      if (!ModelState.IsValid || !result.Succeeded)
+      {
+        return View(model);
+      }
+
+      foreach (var error in result.Errors)
+      {
+        ModelState.AddModelError(string.Empty, error.Description);
+      }
+
       return View(model);
     }
-
-    foreach (var error in result.Errors)
+    else
     {
-      ModelState.AddModelError(string.Empty, error.Description);
+      var errors = new List<IdentityError>
+      {
+        new IdentityError
+        {
+          Code = "Unauthorized",
+          Description = "You are not authorized to create a student account."
+        }
+      };
+      return RedirectToAction("Index", "Home", errors);
     }
-
-    return View(model);
   }
 
   [HttpGet]
