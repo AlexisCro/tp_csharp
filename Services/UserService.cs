@@ -38,12 +38,6 @@ public class UserService
         return result;
     }
 
-    public async Task<IList<string>> GetRoles(UserModel user)
-    {
-        var roles = await _userManager.GetRolesAsync(user);
-        return roles;
-    }
-
     public async Task<bool> GetCurrentUserIsTeacher()
     {
         var user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
@@ -52,6 +46,7 @@ public class UserService
             return false;
         }
         var currentUser = await _context.Users.FirstOrDefaultAsync(u => u.Id == user.Id);
-        return currentUser?.Role.Name == "Teacher" ? true : false;
+        var roleCurrentUser = await _context.Roles.FirstOrDefaultAsync(r => r.Id == currentUser.RoleId);
+        return roleCurrentUser?.Name == "Teacher" ? true : false;
     }
 }

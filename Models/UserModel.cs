@@ -11,6 +11,12 @@ namespace mvc.Models
 
     [Required]
     public string Lastname { get; set; }
-    public RoleModel Role { get; set; }
+
+
+    // Define the association between a User and a Role
+    // Here we are using the RoleId as a foreign key
+    // And the relation is optional
+    public int? RoleId { get; set; }
+    public RoleModel? Role { get; set; }
   }
 }

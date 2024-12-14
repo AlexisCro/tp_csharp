@@ -1,6 +1,3 @@
-using mvc.Data;
-using mvc.Models;
-using mvc.ViewModels;
 using System.ComponentModel.DataAnnotations;
 
 namespace mvc.ViewModels;

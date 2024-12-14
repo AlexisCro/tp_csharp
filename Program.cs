@@ -24,8 +24,13 @@ builder.Services.AddIdentity<UserModel, IdentityRole>(options =>
   options.User.RequireUniqueEmail = true;
 }).AddEntityFrameworkStores<ApplicationDbContext>();
 
-builder.Services.AddIdentityCore<TeacherModel>().AddEntityFrameworkStores<ApplicationDbContext>();
-builder.Services.AddIdentityCore<StudentModel>().AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddIdentityCore<TeacherModel>()
+                .AddSignInManager<SignInManager<TeacherModel>>()
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+
+builder.Services.AddIdentityCore<StudentModel>()
+                .AddSignInManager<SignInManager<StudentModel>>()
+                .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<UserService>();
