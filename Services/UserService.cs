@@ -8,14 +8,12 @@ namespace mvc.Services;
 public class UserService
 {
     private readonly UserManager<UserModel> _userManager;
-    private readonly SignInManager<UserModel> _signInManager;
     private readonly IHttpContextAccessor _httpContextAccessor;
     private readonly ApplicationDbContext _context;
 
-    public UserService(UserManager<UserModel> userManager, SignInManager<UserModel> signInManager, IHttpContextAccessor httpContextAccessor, ApplicationDbContext context)
+    public UserService(UserManager<UserModel> userManager, IHttpContextAccessor httpContextAccessor, ApplicationDbContext context)
     {
         _userManager         = userManager;
-        _signInManager       = signInManager;
         _httpContextAccessor = httpContextAccessor;
         _context             = context;
     }
@@ -34,6 +32,19 @@ public class UserService
         else
         {
             return currentUser;
+        }
+    }
+
+    public async Task<string> GetCurrentUserId()
+    {
+        var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+        if (currentUser == null)
+        {
+            return null;
+        }
+        else
+        {
+            return currentUser.Id;
         }
     }
 

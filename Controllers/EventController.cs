@@ -116,7 +116,7 @@ public class EventController : Controller
     var eventObject = _context.Events.Find(id);
     var user = await _userService.GetCurrentStudent();
     
-    var participant = new ParticipantModel
+    var participant = new ParticipantModel(_context)
     {
       EventId = eventObject.Id,
       StudentId = user.Id
@@ -131,6 +131,25 @@ public class EventController : Controller
     eventObject.ParticipantsCount++;
     _context.Participants.Add(participant);
     TempData["Success"] = "Vous êtes inscrit à l'événement.";
+    _context.SaveChanges();
+    return RedirectToAction("Index");
+  }
+
+  public async Task<ActionResult> UnsubscribeToEvent(int id)
+  {
+    var eventObject = _context.Events.Find(id);
+    var user        = await _userService.GetCurrentStudent();
+    var participant = _context.Participants.FirstOrDefault(p => p.EventId == eventObject.Id && p.StudentId == user.Id);
+
+    if (participant == null)
+    {
+      TempData["Error"] = "Vous n'êtes pas inscrit à cet événement.";
+      return RedirectToAction("Index");
+    }
+
+    eventObject.ParticipantsCount--;
+    _context.Participants.Remove(participant);
+    TempData["Success"] = "Vous êtes désinscrit de l'événement.";
     _context.SaveChanges();
     return RedirectToAction("Index");
   }

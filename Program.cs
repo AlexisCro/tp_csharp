@@ -34,6 +34,7 @@ builder.Services.AddIdentityCore<StudentModel>()
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<ParticipantService>();
 
 var app = builder.Build();
 

@@ -1,6 +1,12 @@
 @using mvc.Services;
+@using mvc.Models;
+@using mvc.Data;
+@using Microsoft.AspNetCore.Identity;
+@using Microsoft.EntityFrameworkCore;
+
 
 @inject mvc.Services.UserService UserService
+@inject mvc.Services.ParticipantService ParticipantService
 
 @model List<mvc.Models.EventModel>
 
@@ -40,7 +46,14 @@
           }
           else
           {
-            <a class="btn btn-success" asp-controller="Event" asp-action="SubscribeToEvent" asp-route-id="@eventObject.Id">Subscribe</a>
+            @if(await ParticipantService.IsParticipant(@eventObject.Id, await UserService.GetCurrentUserId()))
+            {
+              <a class="btn btn-danger" asp-controller="Event" asp-action="UnsubscribeToEvent" asp-route-id="@eventObject.Id">Unsubscribe</a>
+            }
+            else
+            {
+              <a class="btn btn-success" asp-controller="Event" asp-action="SubscribeToEvent" asp-route-id="@eventObject.Id">Subscribe</a>
+            }
           }
         </td>
       </tr>
