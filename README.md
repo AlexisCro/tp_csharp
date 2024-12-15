@@ -43,11 +43,38 @@ So to that we have implement a new table between IdentityUser and TeacherModel o
 
 So `TeacherModel` and `StudentModel` inherit of `UserModel` which inherit of `IdentityUser`.
 
-## Teacher Object
-### Model
+## Database
+In this project our purpose is to have a student list, a teacher list and an event list. 
 
-### Controller
+And each student can subscribe to an event. 
 
-## Student Object
+So thaht we have these tables in our database : 
+- Students
+- Teachers
+- Events
 
-## Event Object
+And a join table `Participants` to register students who want to participate to the event. 
+So we have a has_many has_many relation. 
+
+Indeed, a student can participate on many events and an events can have many participants.
+
+## Test to check the app
+### Teacher
+When the app start you will arrive on the Home page. This page will a bit empty until you register a teacher who can be register event. 
+
+So the first step is to create a teacher, go to the Register page and create a teacher account. 
+Then Login you as a teacher, go to the page Login and enter your credentials. 
+
+Now you can create students and events. 
+
+### Student
+When a student is created, you can logout as a teacher and Login as a student. 
+
+As a student you don't have access to all application. So it's normal to don't have the permission to edit, delete or create a teacher or an event or a student. 
+
+You could try as a student to want to create a teacher and reach the `/Account/RegisterStudent`, but you will redirect with a message error. 
+
+But as a student, you can subscribe to an event or unsubscribe to event where you're registered. 
+
+### Event
+A teacher can create an Event by filling the form, or he can edit an event.
