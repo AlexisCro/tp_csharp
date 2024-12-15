@@ -1,6 +1,10 @@
 ﻿@using mvc.Controllers;
 @using mvc.Models;
+@using mvc.Services;
 @model List<EventModel>;
+
+@inject mvc.Services.UserService UserService
+@inject mvc.Services.ParticipantService ParticipantService
 
 @{
     ViewData["Title"] = "Home Page";
@@ -20,16 +24,28 @@
 <div class='d-flex justify-content-around align-items-center flex-row'>
   @foreach(var eventObject in @Model)
   {
-    <div class="card m-3 w-50" style="height: 300px;">
+    <div class="card m-3 w-50">
       <div class='card-header'>
         <h3>@eventObject.Title</h3>
       </div>
-      <div class='card-body overflow-y-auto' style="max-height:150xp;">
+      <div class='card-body' style="max-height:150px; overflow-y: scroll;">
         <p>@eventObject.Description</p>
       </div>
-      <div class='card-footer d-flex flex-row justify-content-around align-items-center'>
-        <p>Date : @eventObject.EventDate</p>
-        <p>Max Participants : @eventObject.MaxParticipants</p>
+      <div class='card-footer d-flex flex-column justify-content-around align-items-center'>
+        <div class='row w-100 d-flex justify-content-around align-items-center flex-row'>
+          <p class="col-md-6">Date : @eventObject.EventDate</p>
+          <p class="col-md-6">Participants : @eventObject.ParticipantsCount / @eventObject.MaxParticipants</p>
+        </div>
+        <div class='row d-flex flex-row justify-content-around align-items-center'>
+          @if(await ParticipantService.IsParticipant(@eventObject.Id, await UserService.GetCurrentUserId()))
+          {
+            <a class="btn btn-danger" asp-controller="Event" asp-action="UnsubscribeToEvent" asp-route-id="@eventObject.Id">Unsubscribe</a>
+          }
+          else
+          {
+            <a class="btn btn-success" asp-controller="Event" asp-action="SubscribeToEvent" asp-route-id="@eventObject.Id">Subscribe</a>
+          }
+        </div>
       </div>
     </div>
   }
