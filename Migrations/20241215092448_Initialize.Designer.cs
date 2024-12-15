@@ -12,8 +12,8 @@ using mvc.Data;
 namespace tpnote.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241214110721_StartCleanMigration")]
-    partial class StartCleanMigration
+    [Migration("20241215092448_Initialize")]
+    partial class Initialize
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -195,31 +195,22 @@ namespace tpnote.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Events");
+                    b.ToTable("Events", (string)null);
                 });
 
             modelBuilder.Entity("mvc.Models.ParticipantModel", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
                     b.Property<int>("EventId")
                         .HasColumnType("int");
 
                     b.Property<string>("StudentId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("EventId");
+                    b.HasKey("EventId", "StudentId");
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("Participants");
+                    b.ToTable("Participants", (string)null);
                 });
 
             modelBuilder.Entity("mvc.Models.RoleModel", b =>
@@ -236,7 +227,7 @@ namespace tpnote.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Roles");
+                    b.ToTable("Roles", (string)null);
                 });
 
             modelBuilder.Entity("mvc.Models.UserModel", b =>

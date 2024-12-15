@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace tpnote.Migrations
 {
     /// <inheritdoc />
-    public partial class StartCleanMigration : Migration
+    public partial class Initialize : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -234,14 +234,12 @@ namespace tpnote.Migrations
                 name: "Participants",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
                     EventId = table.Column<int>(type: "int", nullable: false),
                     StudentId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Participants", x => x.Id);
+                    table.PrimaryKey("PK_Participants", x => new { x.EventId, x.StudentId });
                     table.ForeignKey(
                         name: "FK_Participants_Events_EventId",
                         column: x => x.EventId,
@@ -282,11 +280,6 @@ namespace tpnote.Migrations
                 name: "IX_AspNetUserRoles_RoleId",
                 table: "AspNetUserRoles",
                 column: "RoleId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Participants_EventId",
-                table: "Participants",
-                column: "EventId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Participants_StudentId",
